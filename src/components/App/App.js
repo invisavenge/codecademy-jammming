@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // CSS Imports
 import './App.css';
@@ -47,12 +47,15 @@ const App = () => {
     setPlaylistTitle(playlistTitle);
   };
 
-  const savePlaylist = uris => {
-    if (uris.length !== 0) {
-      console.log(uris);
+  const savePlaylist = async uris => {
+    try {
+      await spotify.savePlaylist(playlistTitle, uris);
+
       // Reset title and tracks
       setPlaylistTitle('New Playlist');
       setPlaylistTracks([]);
+    } catch (error) {
+      console.error(error.message);
     }
   };
 

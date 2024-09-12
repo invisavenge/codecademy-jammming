@@ -24,7 +24,6 @@ class Spotify {
       const expiresIn = Number(expiresInMatch[1]);
       window.setTimeout(() => this.accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/'); // This clears the parameters, allowing us to grab a new access token when it expires.
-      console.log(this.accessToken);
       return this.accessToken;
     } else {
       window.location = url;
@@ -66,7 +65,53 @@ class Spotify {
   }
 
   async savePlaylist(name, trackUris) {
+    if (!name || !trackUris.length) {
+      return;
+    }
 
+    try {
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}` 
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const json = await response.json();
+
+      const userId = json.id;
+
+      const response2 = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+          method: 'POST',
+          body: JSON.stringify({name: name}) 
+        }
+      });
+
+      if (!response2.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const json2 = await response2.json();
+
+      const playlistId = json2.id;
+
+      const response3 = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+          method: 'POST',
+          body: JSON.stringify({uris: trackUris}) 
+        } 
+      });
+
+      return response3;
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 }
 
