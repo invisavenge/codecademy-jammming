@@ -44,11 +44,13 @@ const App = () => {
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
 
   const addSearchResultToPlaylist = (track) => {
-    if (!playlistTracks.includes(track)) {
-      setPlaylistTracks(prev => {
-        return [track, ...prev];
-      });
+    if (playlistTracks.some(existingTrack => existingTrack.id === track.id)) {
+      return; // The track already exists, skip
     }
+
+    setPlaylistTracks(prevTracks => {
+      return [...prevTracks, track];
+    });
   };
 
   return (
@@ -58,8 +60,16 @@ const App = () => {
       </header>
 
       <SearchBar />
-      <SearchResults searchResults={searchResults} addTrack={addSearchResultToPlaylist} />
-      <Playlist playlistTitle={playlistTitle} playlistTracks={playlistTracks} />
+
+      <SearchResults
+        searchResults={searchResults}
+        addSearchResultToPlaylist={addSearchResultToPlaylist}
+      />
+
+      <Playlist
+        playlistTitle={playlistTitle}
+        playlistTracks={playlistTracks}
+      />
     </>
   );
 };
