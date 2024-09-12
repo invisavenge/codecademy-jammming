@@ -2,9 +2,21 @@ import './Playlist.css';
 
 import Tracklist from '../Tracklist/Tracklist';
 
-const Playlist = ({playlistTitle, playlistTracks, removeTrackFromPlaylist, changePlaylistTitle}) => {
+const Playlist = ({
+  playlistTitle,
+  playlistTracks,
+  removeTrackFromPlaylist,
+  changePlaylistTitle,
+  savePlaylist
+}) => {
   const handleChangePlaylistTitle = ({target}) => {
     changePlaylistTitle(target.value);
+  };
+
+  const handleSavePlaylist = _event => {
+   const uris = playlistTracks.map(track => track.uri);
+
+   savePlaylist(uris);
   };
 
   return (
@@ -13,7 +25,7 @@ const Playlist = ({playlistTitle, playlistTracks, removeTrackFromPlaylist, chang
 
       <Tracklist tracks={playlistTracks} removeTrackFromPlaylist={removeTrackFromPlaylist} />
 
-      <button>Save to Spotify</button>
+      <button onClick={handleSavePlaylist}>Save to Spotify</button>
     </section>
   );
 };
