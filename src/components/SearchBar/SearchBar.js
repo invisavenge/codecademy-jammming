@@ -1,10 +1,16 @@
 import './SearchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({searchSpotify}) => {
+  const handleSearchSpotify = _event => {
+    const searchTerm = document.querySelector('#search').value;
+
+    searchSpotify(searchTerm);
+  };
+
   return (
     <section>
-      <input type="text" placeholder="Enter a song" />
-      <button>Search</button>
+      <input id="search" type="text" placeholder="Enter a song" />
+      <button onClick={handleSearchSpotify}>Search</button>
     </section>
   );
 };
