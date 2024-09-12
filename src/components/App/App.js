@@ -43,6 +43,14 @@ const App = () => {
   const [playlistTitle, setPlaylistTitle] = useState('Playlist Title');
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
 
+  const addSearchResultToPlaylist = (track) => {
+    if (!playlistTracks.includes(track)) {
+      setPlaylistTracks(prev => {
+        return [track, ...prev];
+      });
+    }
+  };
+
   return (
     <>
       <header>
@@ -50,7 +58,7 @@ const App = () => {
       </header>
 
       <SearchBar />
-      <SearchResults searchResults={searchResults} />
+      <SearchResults searchResults={searchResults} addTrack={addSearchResultToPlaylist} />
       <Playlist playlistTitle={playlistTitle} playlistTracks={playlistTracks} />
     </>
   );

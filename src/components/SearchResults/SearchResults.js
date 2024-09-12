@@ -2,12 +2,12 @@ import './SearchResults.css';
 
 import Tracklist from '../Tracklist/Tracklist';
 
-const SearchResults = ({searchResults}) => {
+const SearchResults = ({searchResults, addTrack}) => {
   return (
     <section>
       <h2>Results</h2>
 
-      <Tracklist tracks={searchResults} />
+      <Tracklist tracks={searchResults} addTrack={addTrack} />
     </section>
   );
 };
