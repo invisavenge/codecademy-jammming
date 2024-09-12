@@ -1,7 +1,15 @@
 import './Track.css';
 
-const Track = () => {
-  return <h2>Track</h2>;
+const Track = ({track}) => {
+  const {name, artist, album} = track;
+
+  return (
+    <div>
+      <p>{name}</p>
+      <p>{artist}</p>
+      <p>{album}</p>
+    </div>
+  )
 };
 
 export default Track;
