@@ -2,10 +2,14 @@ import './Playlist.css';
 
 import Tracklist from '../Tracklist/Tracklist';
 
-const Playlist = ({playlistTitle, playlistTracks, removeTrackFromPlaylist}) => {
+const Playlist = ({playlistTitle, playlistTracks, removeTrackFromPlaylist, changePlaylistTitle}) => {
+  const handleChangePlaylistTitle = ({target}) => {
+    changePlaylistTitle(target.value);
+  };
+
   return (
     <section>
-      <h2>{playlistTitle}</h2>
+      <input type="text" value={playlistTitle} onChange={handleChangePlaylistTitle} />
 
       <Tracklist tracks={playlistTracks} removeTrackFromPlaylist={removeTrackFromPlaylist} />
 

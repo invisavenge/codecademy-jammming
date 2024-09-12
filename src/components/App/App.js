@@ -59,6 +59,10 @@ const App = () => {
     });
   };
 
+  const changePlaylistTitle = playlistTitle => {
+    setPlaylistTitle(playlistTitle);
+  };
+
   return (
     <>
       <header>
@@ -76,6 +80,7 @@ const App = () => {
         playlistTitle={playlistTitle}
         playlistTracks={playlistTracks}
         removeTrackFromPlaylist={removeTrackFromPlaylist}
+        changePlaylistTitle={changePlaylistTitle}
       />
     </>
   );
