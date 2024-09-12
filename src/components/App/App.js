@@ -22,9 +22,26 @@ const App = () => {
       album: 'Californication',
       id: 2
     }
-  ];
+  ]; // Remove later
+
+  const mockPlaylistTracks = [
+    {
+      name: 'Not Like Us',
+      artist: 'Kendrick Lamar',
+      album: 'Not Like Us',
+      id: 3
+    },
+    {
+      name: 'Many Men (Wish Death)',
+      artist: '50 Cent',
+      album: 'Get Rich or Die Tryin',
+      id: 4
+    }
+  ]; // Remove later
 
   const [searchResults, setSearchResults] = useState(mockSearchResults);
+  const [playlistTitle, setPlaylistTitle] = useState('Playlist Title');
+  const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
 
   return (
     <>
@@ -34,7 +51,7 @@ const App = () => {
 
       <SearchBar />
       <SearchResults searchResults={searchResults} />
-      <Playlist />
+      <Playlist playlistTitle={playlistTitle} playlistTracks={playlistTracks} />
     </>
   );
 };

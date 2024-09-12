@@ -1,9 +1,13 @@
 import './Playlist.css';
 
-const Playlist = () => {
+import Tracklist from '../Tracklist/Tracklist';
+
+const Playlist = ({playlistTitle, playlistTracks}) => {
   return (
     <section>
-      <h2>Playlist</h2>
+      <h2>{playlistTitle}</h2>
+
+      <Tracklist tracks={playlistTracks} />
 
       <button>Save to Spotify</button>
     </section>
