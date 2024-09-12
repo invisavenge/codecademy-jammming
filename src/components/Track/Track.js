@@ -1,10 +1,14 @@
 import './Track.css';
 
-const Track = ({track, addTrackToPlaylist}) => {
+const Track = ({track, addTrackToPlaylist, removeTrackFromPlaylist}) => {
   const {name, artist, album} = track;
 
-  const handleAddTrackToPlaylist = (_event) => {
+  const handleAddTrackToPlaylist = _event => {
     addTrackToPlaylist(track);
+  };
+
+  const handleRemoveTrackFromPlaylist = _event => {
+    removeTrackFromPlaylist(track);
   };
 
   return (
@@ -12,7 +16,9 @@ const Track = ({track, addTrackToPlaylist}) => {
       <p>{name}</p>
       <p>{artist}</p>
       <p>{album}</p>
-      <button onClick={handleAddTrackToPlaylist}>+</button>
+
+      {addTrackToPlaylist && <button onClick={handleAddTrackToPlaylist}>+</button>}
+      {removeTrackFromPlaylist && <button onClick={handleRemoveTrackFromPlaylist}>-</button>}
     </div>
   )
 };

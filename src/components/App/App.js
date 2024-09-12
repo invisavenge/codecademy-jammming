@@ -43,13 +43,19 @@ const App = () => {
   const [playlistTitle, setPlaylistTitle] = useState('Playlist Title');
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
 
-  const addSearchResultToPlaylist = (track) => {
+  const addSearchResultToPlaylist = track => {
     if (playlistTracks.some(existingTrack => existingTrack.id === track.id)) {
       return; // The track already exists, skip
     }
 
     setPlaylistTracks(prevTracks => {
       return [...prevTracks, track];
+    });
+  };
+
+  const removeTrackFromPlaylist = track => {
+    setPlaylistTracks(prevTracks => {
+      return prevTracks.filter(currentTrack => currentTrack.id !== track.id);
     });
   };
 
@@ -69,6 +75,7 @@ const App = () => {
       <Playlist
         playlistTitle={playlistTitle}
         playlistTracks={playlistTracks}
+        removeTrackFromPlaylist={removeTrackFromPlaylist}
       />
     </>
   );
